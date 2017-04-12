@@ -1,0 +1,22 @@
+{
+  "name": "reviser",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "author": "Matthew Sessions <shichongrui@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "hoist-non-react-statics": "^1.2.0",
+    "jest": "^19.0.2",
+    "react": "^15.5.3",
+    "react-test-renderer": "^15.5.4",
+    "simmutable": "^2.0.0"
+  },
+  "scripts": {
+    "build": "babel ./lib --out-dir dist",
+    "test": "jest ."
+  }
+}

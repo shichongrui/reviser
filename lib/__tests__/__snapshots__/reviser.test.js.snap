@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reviser passes in store state when asked for 1`] = `
+<div>
+  1
+</div>
+`;
+
+exports[`reviser renders the wrapped component with the passed in props 1`] = `
+<div>
+  yo
+</div>
+`;
+
+exports[`state-change-first-render 1`] = `
+<div>
+  1
+</div>
+`;
+
+exports[`state-change-re-render 1`] = `
+<div>
+  2
+</div>
+`;
