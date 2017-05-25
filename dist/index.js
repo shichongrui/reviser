@@ -4,9 +4,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var store = require('./store');
 var actions = require('./actions');
-var reactor = require('./reactor');
+var reviser = require('./reviser');
 
 module.exports = _extends({
   store: store,
-  reactor: reactor
+  reviser: reviser
 }, actions);
