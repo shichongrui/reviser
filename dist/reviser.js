@@ -12,47 +12,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = require('react');
 var hoistStatics = require('hoist-non-react-statics');
-var store = require('./store');
-var actions = require('./actions');
 
 var NOOP = function NOOP() {};
 
-module.exports = function (mapStore, mapActions) {
-  mapStore = mapStore || NOOP;
-  mapActions = mapActions || NOOP;
+module.exports = function (store, actions) {
+  return function (mapStore, mapActions) {
+    mapStore = mapStore || NOOP;
+    mapActions = mapActions || NOOP;
 
-  return function (ComponentToWrap) {
-    var Reviser = function (_React$Component) {
-      _inherits(Reviser, _React$Component);
+    return function (ComponentToWrap) {
+      var Reviser = function (_React$Component) {
+        _inherits(Reviser, _React$Component);
 
-      function Reviser() {
-        _classCallCheck(this, Reviser);
+        function Reviser() {
+          _classCallCheck(this, Reviser);
 
-        return _possibleConstructorReturn(this, (Reviser.__proto__ || Object.getPrototypeOf(Reviser)).apply(this, arguments));
-      }
-
-      _createClass(Reviser, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-          this.boundForceUpdate = this.forceUpdate.bind(this);
-          store.on('change', this.boundForceUpdate);
+          return _possibleConstructorReturn(this, (Reviser.__proto__ || Object.getPrototypeOf(Reviser)).apply(this, arguments));
         }
-      }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-          store.removeListener('change', this.boundForceUpdate);
-        }
-      }, {
-        key: 'render',
-        value: function render() {
-          return React.createElement(ComponentToWrap, _extends({}, this.props, mapStore(store.get()), mapActions(actions.actions)));
-        }
-      }]);
 
+        _createClass(Reviser, [{
+          key: 'componentWillMount',
+          value: function componentWillMount() {
+            this.boundForceUpdate = this.forceUpdate.bind(this);
+            store.on('change', this.boundForceUpdate);
+          }
+        }, {
+          key: 'componentWillUnmount',
+          value: function componentWillUnmount() {
+            store.removeListener('change', this.boundForceUpdate);
+          }
+        }, {
+          key: 'render',
+          value: function render() {
+            return React.createElement(ComponentToWrap, _extends({}, this.props, mapStore(store.get()), mapActions(actions)));
+          }
+        }]);
+
+        return Reviser;
+      }(React.Component);
+
+      hoistStatics(Reviser, ComponentToWrap);
       return Reviser;
-    }(React.Component);
-
-    hoistStatics(Reviser, ComponentToWrap);
-    return Reviser;
+    };
   };
 };
