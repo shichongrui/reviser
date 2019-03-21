@@ -33,13 +33,18 @@ module.exports = function (store, actions) {
         _createClass(Reviser, [{
           key: 'componentWillMount',
           value: function componentWillMount() {
-            this.boundForceUpdate = this.forceUpdate.bind(this);
-            store.on('change', this.boundForceUpdate);
+            this.boundUpdate = this.update.bind(this);
+            store.on('change', this.boundUpdate);
           }
         }, {
           key: 'componentWillUnmount',
           value: function componentWillUnmount() {
-            store.removeListener('change', this.boundForceUpdate);
+            store.removeListener('change', this.boundUpdate);
+          }
+        }, {
+          key: 'update',
+          value: function update() {
+            this.forceUpdate();
           }
         }, {
           key: 'render',
